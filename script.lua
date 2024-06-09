@@ -552,7 +552,7 @@ local function unrgbp(frame, property)
 	end
 end
 local tweenTimeButton = 0.3
-local function GhostLib.Functions:RemoveRgb(frame)
+function GhostLib.Functions:RemoveRgb(frame)
 	coroutine.wrap(function()
 		local child = frame:FindFirstChild("RGB")
 		if child then
@@ -568,7 +568,7 @@ local function GhostLib.Functions:RemoveRgb(frame)
 end
 
 -- Not mine 
-local function GhostLib.Functions:Rgb(frame)
+function GhostLib.Functions:Rgb(frame)
 	coroutine.wrap(function()
 		if not frame:FindFirstChild("RGB") then
 			local found = false
