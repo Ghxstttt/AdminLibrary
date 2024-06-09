@@ -10,8 +10,8 @@ local GhostLib = {
 	Pages = {},
 	Notifications = {},
 	Started = false,
-	Version = 1,
-    	PlayerM = loadstring(game:HttpGet("https://raw.githubusercontent.com/Ghostito/PlayerM/main/script.lua"))();
+	Version = 2,
+    PlayerM = loadstring(game:HttpGet("https://raw.githubusercontent.com/Ghxstttt/PlayerM/main/script.lua"))();
 	
 }
 
@@ -63,7 +63,7 @@ local pos0 = Instance.new("TextLabel")
 local pos1 = Instance.new("TextLabel")
 local ScriptTitle = Instance.new("TextLabel")
 --Properties:
-function uiStroke(frame)
+local function uiStroke(frame)
 	local us = Instance.new("UIStroke")
 	us.Parent = frame
 	return us
@@ -537,7 +537,7 @@ coroutine.wrap(function()
 	end
 end)()
 
-function rgbp(frame, property)
+local function rgbp(frame, property)
 	coroutine.wrap(function()
 		frame:SetAttribute("RGB", true)
 		repeat wait()
@@ -546,13 +546,13 @@ function rgbp(frame, property)
 	end)()
 
 end
-function unrgbp(frame, property)
+local function unrgbp(frame, property)
 	if frame:GetAttribute("RGB") then
 		frame:SetAttribute("RGB", false)
 	end
 end
 local tweenTimeButton = 0.3
-function GhostLib.Functions:RemoveRgb(frame)
+local function GhostLib.Functions:RemoveRgb(frame)
 	coroutine.wrap(function()
 		local child = frame:FindFirstChild("RGB")
 		if child then
@@ -568,7 +568,7 @@ function GhostLib.Functions:RemoveRgb(frame)
 end
 
 -- Not mine 
-function GhostLib.Functions:Rgb(frame)
+local function GhostLib.Functions:Rgb(frame)
 	coroutine.wrap(function()
 		if not frame:FindFirstChild("RGB") then
 			local found = false
@@ -698,7 +698,7 @@ function GhostLib.Functions:Rgb(frame)
 end
 
 -- This function is not mine jejejejje
-function dragify(Frame)
+local function dragify(Frame)
 	local dragToggle = nil
 	local dragSpeed = .1
 	local dragInput = nil
@@ -1010,48 +1010,15 @@ GhostLib.States.ASCP = nil
 local Box2
 local Box
 
-function msg(msg)
+local function msg(msg)
     game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack({
         [1] = msg,
         [2] = "All"
     }))
 end
-local AntiSpy = GhostLib.Functions:AddPage({
-	Name = "ANTI SPY CHAT",
-	Image = "http://www.roblox.com/asset/?id=9704079911"
-})
 
 
-GhostLib.Functions:AddKeybind({
-	Key = Enum.KeyCode.Minus,
-	Text = "Focus Message Box",
-	CallBack = function()
-        wait(0.1)
-        local plr = GhostLib.PlayerM:GetPlayer(Box.Text)
-        
-        if plr or (Box.Text == ":g") then
-            Box2:CaptureFocus()
-        else
-            Box:CaptureFocus()
-        end
-		
-	end,
-},AntiSpy)
-
-Box = GhostLib.Functions:AddTextBox({
-	Text = "Player",
-	ClearTextOnFocus = false,
-	ClearTextOnEnter = false,
-	CallBack = function(input)
-		local plr = GhostLib.PlayerM:GetPlayer(input)
-        GhostLib.States.ASCP = plr or nil
-        if input == ":g" then
-            GhostLib.States.ASCP = ":g"
-        end
-        Box2:CaptureFocus()
-	end,
-}, AntiSpy)
-function oneString(arguments1)
+local function oneString(arguments1)
 	local text1 = ""
 	local num = 0
 	for i = 1,#arguments1 do
@@ -1064,34 +1031,7 @@ function oneString(arguments1)
 
 	return text1
 end
-Box2 = GhostLib.Functions:AddTextBox({
-	Text = "Message",
-	ClearTextOnFocus = false,
-	ClearTextOnEnter = true,
-	CallBack = function(input)
-		local plr = GhostLib.States.ASCP 
-        if plr and plr ~= ":g" then
-            local args = {}
-            local pattern = "%S+"
-    
-            for word in string.gmatch(input, pattern) do
-                table.insert(args, word)
-            end
 
-            local msj = "/w "..plr.Name.." "..oneString(args)
-            msg(msj)
-        elseif plr == ":g" then
-            local args = {}
-            local pattern = "%S+"
-    
-            for word in string.gmatch(input, pattern) do
-                table.insert(args, word)
-            end
-            local msj = oneString(args)
-            msg(msj)
-        end
-	end,
-}, AntiSpy)
 
 local cmdNames = {}
 
@@ -1271,13 +1211,13 @@ end)
 function GhostLib.Functions:SetScriptName(Str)
 	ScriptTitle.Text = Str or "GHXST ADMIN"
 end
-function removeguion(string1)
+local function removeguion(string1)
 	local str = string1
 	local newStr, replaced = string.gsub(str, "_", " ")
 	return newStr
 end
 
-function mayusfirst(str)
+local function mayusfirst(str)
 	local string1 = string.lower(str)
 	return removeguion((string1:gsub("^%l", string.upper)))
 end
